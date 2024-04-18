@@ -27,11 +27,8 @@ export const Start = () => {
 
   const handleSearch =  useCallback(async (dataInstallatipnType: "new" | "assign") => {
     setIsLoading(true);
-    console.log("paginateOptions in handler: ", paginateOptions);
     FilmService.getFilmsByText({ ...paginateOptions, text: text })
       .then((response) => {
-        console.log("response", response);
-        console.log("dataInstallatipnType", response);
         error && setError(null);
         dataInstallatipnType === "new"
           ? setFilms(response?.data?.docs)
@@ -59,7 +56,6 @@ export const Start = () => {
 
   useEffect(() => {
     if (text !== "" && location.state?.search === text) {
-      console.log("new",  paginateOptions, paginateOptions);
       handleSearch("new");
     }
     /* eslint-disable-next-line */

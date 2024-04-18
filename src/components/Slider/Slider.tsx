@@ -19,9 +19,7 @@ interface ISliderProps {
 function ImageWithLoading({ src }: { src: string }) {
   const [loading, setLoading] = useState(true);
 
-  const handleImageLoad = () => {
-    setLoading(false);
-  };
+  const handleImageLoad = () => { setLoading(false) };
 
   return (
     <>
@@ -51,12 +49,12 @@ function getIFilmNode(obj: IFilm): ReactNode {
     <div className={classes.opts}>
       <p>{obj.year}<span> | </span>{FilmTypeDictionary[obj?.type]}</p>
       <p>
-        {
-          obj.countries.map((country, idx) => {
+        { obj.countries ? (
+            obj.countries.map((country, idx) => {
             const current = typeof country === "string" ? country : country.name;
             return idx !== obj.countries.length - 1 ? current + ", ": current;
-          })
-        }
+          }))
+        : null}
       </p>
     </div>
   )
@@ -79,7 +77,9 @@ function getDescriptionNodeByObjType(obj: IFilm | ISimularMovie): ReactNode {
 }
 
 export const Slide = (props: ISliderProps) => {
-  return !props.films ? null : (
+
+  return props.films?.length !== 0
+  ? (
     <Slider
     onReachEnd={() => {
       props?.getNext !== undefined && props.getNext();
@@ -113,4 +113,5 @@ export const Slide = (props: ISliderProps) => {
       ))}
     </Slider>
   )
+  : null
 }

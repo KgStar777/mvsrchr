@@ -24,9 +24,6 @@ export function Film() {
   const [text, setText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  console.log("isModalOpen", isModalOpen);
-  console.log("film", film);
-
   const onOpenModal = () => setIsModalOpen(true);
   const onCloseModal = () => setIsModalOpen(false);
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +31,6 @@ export function Film() {
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log("eeeee", e);
     if (e.key === "Enter") {
       navigate("/", {
         state: { search: text }
@@ -50,14 +46,6 @@ export function Film() {
       })
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
   }, [id]);
-
-  // const getTrailer = () => {
-  //   axios.get(`https://imdb-api.com/en/API/YouTubeTrailer/${apiKey}/${filmId}`)
-  //     .then(response => {
-  //         setTrailer(response.data);
-  //         setTrailerBool(true);
-  //   })
-  // }
 
   return (
     <>
